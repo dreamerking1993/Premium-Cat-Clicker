@@ -1,0 +1,20 @@
+body {
+	margin: 0 0 0 5%;
+}
+img {
+	width: 90%;
+	height: auto;
+}
+
+.text {
+	text-align: center;
+}
+.catArray {
+	cursor: pointer;
+	color: red;
+}
+span {
+	margin: 0 0 4% 48%;
+	font-size: 1.5em;
+	color:green;
+}
