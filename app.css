@@ -2,19 +2,35 @@ body {
 	margin: 0 0 0 5%;
 }
 img {
-	width: 90%;
+	width: 800px;
 	height: auto;
+}
+.view {
+	display: flex;
 }
 
 .text {
 	text-align: center;
+	color: brown;
+	position: relative;
 }
 .catArray {
 	cursor: pointer;
 	color: red;
+    display: inline-block;
+    width: 150px;
+    margin-right: 20px;
+    margin-bottom: 20px;
+    padding:10px;
+    list-style-type: none;
+    background-color: #cde;	
 }
 span {
-	margin: 0 0 4% 48%;
+	margin: 0 4% 4% 45%;
 	font-size: 1.5em;
 	color:green;
+}
+.clickCat {
+	text-align: center;
+	color: blue;
 }
