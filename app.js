@@ -1,4 +1,6 @@
-var cats = [ //MODEL
+var model = {
+ currentCat: null,   
+ cats: [ //MODEL
     {
         url:"https://www.petfinder.com/wp-content/uploads/2012/11/100901720-cat-adoption-first-30-days-632x475.jpg",
         name:"One-Eyed",
@@ -57,61 +59,101 @@ var cats = [ //MODEL
         url: "https://cdn.thinglink.me/api/image/854796788643659778/1240/10/scaletowidth",
         name:"cuteipies",
         count: 0
-}];
-var model = { 
-    elemm: function(){    // We're creating a DOM element for the cat URL
-        var elem = document.createElement('div'); //MODEL
-        elem.textContent = octupus.seperateCats(i); //MODEL
-        return elem;
-    }
+    }] 
 }
 
 //OCTUPS
 var octupus = {
-    clickCounter: function (image, abc, count){
-                        image.on('click', function(){
-                            abc.empty();
-                            count = count + 1;
-                            abc.append('Clicks '+ count + '');
-                        })
-                  },
-
+    init: function() {
+        model.currentCat = model.cats[0];
+        view.renderList();
+        view.init();
+    },
     seperateCats: function(k) {
-            return cats[k].name;     // This seperates the individual cat...
+            return model.cats[k].name;     // This seperates the individual cat...
+    },
+    getCurrentCat: function() {
+        return model.currentCat;
+    },    
+    setCurrentCat: function(cat) {
+        model.currentCat = cat;
+    },
+    incrementCounter: function() {
+        model.currentCat.count++;
+        view.renderCat();
+    }        
+}
+
+    
+var view = {
+    init: function() {
+        var image = $('.catsss .cat-url');
+        image.on('click', function(){
+            octupus.incrementCounter();
+        })
+        view.renderCat();
+        $('.admin').on('click', function(){
+             event.preventDefault();
+            $('.forAdmin').css("display", "block");
+            var currentCat1 = octupus.getCurrentCat();
+            
+            $('#name').attr("value", currentCat1.name);
+            $('#imgUrl').attr("value", currentCat1.url);
+            $('#clicks').attr("value", currentCat1.count); 
+               
+        })
+
+        $('#cancel-btn').on('click', function(){
+             event.preventDefault();
+            $('.forAdmin').css("display", "none");
+        }) 
+        $('#submit-btn').on('click', function(){
+            event.preventDefault();            
+            
+            var currentCat2 = octupus.getCurrentCat();
+            currentCat2.name = $('#name').val();
+            currentCat2.url = $('#imgUrl').val();
+            currentCat2.count = $('#clicks').val(); 
+            view.renderCat();
+            $('.forAdmin').css("display", "none");
+            //debugger;
+
+        })
+
     },
 
-    seperateUrl: function(p) {
-        return cats[p].url;
-    }
-
-
-}
-
-
-for (var i = 0; i < cats.length; i++) { 
-        var cat = octupus.seperateUrl(i);
-        var mat = model.elemm();
-            // adds the cat name list to the document
-        $('.catArray').append($(mat));    //VIEW
-            // ... and when we click the cat url, the image is displayed
-        listener(mat);
-
-}
-
-
-function listener(mat) {
-    mat.addEventListener('click', (function(catCopy,j) {
-        return function(){ 
-            $('.catsss').empty();
-            $('.catsss').append($('<h1 class="text" id ="text' + j + '">' + cats[j].name + '</h1>'))//adding the title above image
-            $('.catsss').append($('<span class="clicks' + j +'">Clicks ' + 00 +'</span>'));//count of clicks below the image
-            $('.catsss').append($('<img src="' + catCopy + '" class="cat' + j + '">'));//adding the image
-            octupus.clickCounter($('.catsss .cat'+ j +''), $('.catsss .clicks'+ j +''), cats[j].count);//click counter function //OCTUPUS
+    renderList: function() { 
+        //debugger;
+        for (var i = 0; i < model.cats.length; i++) { 
+                var cat = model.cats[i];
+                var elem = document.createElement('div'); 
+                elem.textContent = model.cats[i].name;    
+                    // adds the cat name list to the document
+                $('.catArray').append($(elem));    //VIEW
+                    // ... and when we click the cat name, the image is displayed
+            elem.addEventListener('click', (function(catCopy) {
+                return function(){ 
+                           $('.forAdmin').css("display", "none");
+                            octupus.setCurrentCat(catCopy);
+                            view.renderCat();
+                        }
+                
+            })(cat,i));
 
         }
-        
-})(cat,i));
-}
+    },
+
+    renderCat: function() {//renders the cat image, name and click count
+                var currentCat3 = octupus.getCurrentCat();
+                $('.catsss .cat-count').html(currentCat3.count);
+                $('.catsss .cat-name').html(currentCat3.name);
+                $('.catsss .cat-url').attr('src',currentCat3.url); 
+            }
+}    
+octupus.init();
+
+
+
 
 
 

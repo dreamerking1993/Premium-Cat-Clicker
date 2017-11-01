@@ -10,15 +10,33 @@
    <body>
     	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
 
-    	<h1 class="clickCat"> Cat clicker Premium </h1>
+    	<h1 class="clickCat">"Cat Clicker Premium"</h1>
 
-      <div class="view">
+    	<div class = "catArray"></div>
+      
+      <button class="admin">admin</button></button> 
 
-        	<div class = "catArray"></div>
+     <div class="forAdmin">
+            <form id="search-form" class="search-form" action="#">
+                <label for="search-keyword" class="input1">name</label>
+                <input class="search-keyword" id= "name" type="text" name="search-keyword" placeholder="" required>
+                <label for="search-keyword" class="input2">imgUrl</label>
+                <input class="search-keyword" id= "imgUrl" type="text" name="search-keyword" placeholder="" required>
+                <label for="search-keyword" class="input3">#clicks</label>
+                <input class="search-keyword" id="clicks" type="text" name="search-keyword" placeholder="0" required>
+                <input id="submit-btn" type="submit" value="Save">
+                <input id="cancel-btn" type="submit" value="Cancel">
 
-        	<div class ="catsss"></div>
+            </form>       
+     </div> 
 
-      </div>    
+
+    	<div class ="catsss">
+          <h2 class="cat-name"></h2>
+          <div class="cat-count"></div>
+          <img class="cat-url" src="">
+      </div>
+
     	
    		<script src="app.js"></script> 
 
