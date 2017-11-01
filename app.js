@@ -97,9 +97,10 @@ var view = {
             $('.forAdmin').css("display", "block");
             var currentCat1 = octupus.getCurrentCat();
             
-            $('#name').attr("value", currentCat1.name);
-            $('#imgUrl').attr("value", currentCat1.url);
-            $('#clicks').attr("value", currentCat1.count); 
+            //$('#name').attr("value", currentCat1.name); //don't use this for value, it causes problems
+            $('#name').val(currentCat1.name);
+            $('#imgUrl').val(currentCat1.url);
+            $('#clicks').val(currentCat1.count); 
                
         })
 
@@ -117,7 +118,7 @@ var view = {
             view.renderCat();
             $('.forAdmin').css("display", "none");
             //debugger;
-
+            //return false;
         })
 
     },
